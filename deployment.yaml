@@ -1,0 +1,23 @@
+# deployment using configMap as volumeMounts
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-app
+  namespace: default
+  labels:
+    app: python
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: python
+  template:
+    metadata:
+      labels:
+        app: python
+    spec:
+      containers:
+      - name: pycontainer
+        image: piyushpatil3423/python-app:v1
+        ports:
+        - containerPort: 8000
