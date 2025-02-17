@@ -1,27 +1,10 @@
 pipeline {
     agent any
-
-    environment {
-        DOCKER_IMAGE = "piyushpatil3423/flask-image"
-        DOCKER_TAG = v1.${BUILD_ID}
-        DOCKERHUB_CREDENTIALS = credentials('piyushpatil3423-docker')
-    }
-
     stages {
         stage('Build Docker Image') {
             steps {
                 script {
-                    sh "docker build -t $DOCKER_IMAGE:$DOCKER_TAG ."
-                }
-            }
-        }
-
-        stage('Login to Docker Hub') {
-            steps {
-                script {
-                    withCredentials([usernamePassword(credentialsId: 'piyushpatil3423-docker', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-                        sh "echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin"
-                    }
+                    sh "docker build -t piyushpatil3423/flask-image:v1.${BUILD_ID} . --no-cache "
                 }
             }
         }
@@ -29,7 +12,7 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-                    sh "docker push $DOCKER_IMAGE:$DOCKER_TAG"
+                    sh "docker push piyushpatil3423/flask-image:v1.${BUILD_ID}"
                 }
             }
         }
@@ -39,7 +22,7 @@ pipeline {
                 sh '''
                 kubectl apply -f deployment.yaml
                 kubectl apply -f service.yaml
-                kubectl set image deployment/python-app  python-app=$DOCKER_IMAGE:$DOCKER_TAG
+                kubectl set image deployment/python-app  python-app=piyushpatil3423/flask-image:v1.${BUILD_ID}
                 '''
             }
         }
