@@ -39,6 +39,8 @@ pipeline {
                 sh '''
                 kubectl apply -f deployment.yaml
                 kubectl apply -f service.yaml
+                kubectl set image deployment/nginx busybox=busybox nginx=nginx:1.9.1
+
                 '''
             }
         }
