@@ -4,6 +4,7 @@ pipeline {
     environment {
         DOCKER_IMAGE = "piyushpatil3423/flask-image"
         DOCKER_TAG = "latest"
+        DOCKERHUB_CREDENTIALS = credentials('piyushpatil3423-docker')
     }
 
     stages {
