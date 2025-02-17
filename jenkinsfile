@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = "piyushpatil3423/flask-image"
-        DOCKER_TAG = "latest"
+        DOCKER_TAG = v1.${BUILD_ID}
         DOCKERHUB_CREDENTIALS = credentials('piyushpatil3423-docker')
     }
 
@@ -39,7 +39,7 @@ pipeline {
                 sh '''
                 kubectl apply -f deployment.yaml
                 kubectl apply -f service.yaml
-                kubectl set image deployment/nginx busybox=busybox nginx=nginx:1.9.1
+                kubectl set image deployment/python-app  python-app=$DOCKER_IMAGE:$DOCKER_TAG"
 
                 '''
             }
