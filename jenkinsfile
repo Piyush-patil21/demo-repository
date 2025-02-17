@@ -35,9 +35,6 @@ pipeline {
         }
 
         stage('Deploy Container') {
-            agent {
-                label 'kubernetes'
-            }
             steps {
                 sh '''
                 kubectl apply -f deployment.yaml
