@@ -39,8 +39,7 @@ pipeline {
                 sh '''
                 kubectl apply -f deployment.yaml
                 kubectl apply -f service.yaml
-                kubectl set image deployment/python-app  python-app=$DOCKER_IMAGE:$DOCKER_TAG"
-
+                kubectl set image deployment/python-app  python-app=$DOCKER_IMAGE:$DOCKER_TAG
                 '''
             }
         }
