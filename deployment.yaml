@@ -3,11 +3,10 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: python-app
-  namespace: default
   labels:
     app: python
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: python
@@ -17,7 +16,7 @@ spec:
         app: python
     spec:
       containers:
-      - name: pycontainer
+      - name: python-app
         image: piyushpatil3423/python-app:v1
         ports:
         - containerPort: 8000
