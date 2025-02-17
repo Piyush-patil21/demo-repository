@@ -19,4 +19,4 @@ spec:
       - name: python-app
         image: piyushpatil3423/flask-image:v1.0
         ports:
-        - containerPort: 8000
+        - containerPort: 5000
