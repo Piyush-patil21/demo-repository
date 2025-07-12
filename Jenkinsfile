@@ -4,6 +4,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
+                    sh "pwd"
                     sh "ls -la"
                     sh "docker build -t piyushpatil3423/flask-image:v1.${BUILD_ID} . --no-cache "
                 }
