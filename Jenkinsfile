@@ -1,6 +1,13 @@
 pipeline {
     agent any
     stages {
+        stage('Checkout') {
+            steps {
+                // ✅ This pulls the full source code including Dockerfile
+                checkout scm
+            }
+        }
+        
         stage('Build Docker Image') {
             steps {
                 script {
