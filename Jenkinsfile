@@ -5,6 +5,7 @@ pipeline {
             steps {
                 script {
                     checkout scm
+                    sh "ls -la"
                     sh "docker build -t piyushpatil3423/flask-image:v1.${BUILD_ID} . --no-cache "
                 }
             }
